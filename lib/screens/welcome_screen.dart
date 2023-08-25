@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import "/constants.dart";
 import '/screens/login_screen.dart';
 import '/screens/registration_screen.dart';
-
 class WelcomeScreen extends StatefulWidget {
   static String id= "welcome_screen";
   
@@ -18,12 +17,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>with TickerProviderStateMi
   late AnimationController colorController;
   late Animation animation;
   late Animation colorAnimation;
+  bool _isLoggedIn= true;
   
   
   @override
 
   void initState(){
     super.initState();
+    
+    
     controller =AnimationController(
       vsync:this,//providing the ticker(what so going to act as ticker)
       duration: Duration(seconds:1), //hwo far the animatuion gonna to happen
@@ -54,6 +56,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>with TickerProviderStateMi
       
       });
     });
+    //checkLoginStatus();
+    //checkLoginStatus();
     }
     @override
     void dispose(){
@@ -75,7 +79,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>with TickerProviderStateMi
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Padding(
+
+          Padding(
               //padding for making it center in the screen
               padding: const EdgeInsets.fromLTRB(20, 10, 30, 10),
               child: Row(
@@ -118,9 +123,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>with TickerProviderStateMi
                     Navigator.pushNamed(context,RegistrationScreen.id);
                   },
                   colour: Color.fromARGB(255, 202, 24, 247),),
-          ],
+            
+],
         ),
       ),
+  
     );
   }
 

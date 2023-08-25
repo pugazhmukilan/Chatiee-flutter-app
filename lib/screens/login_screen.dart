@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import "/constants.dart";
 import '/screens/chat_screen.dart';
@@ -11,6 +12,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  addemail(email) async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('email', email);
+    }
+    addpassword(password) async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('password', password);
+    }
+
 
   final _auth= FirebaseAuth.instance;
   late String email;
@@ -60,6 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             button(name:"Login",onpressed: ()async {
               try{
+                addemail(email);
+                addpassword(password);
+                
                 final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
                 // ignore: unnecessary_null_comparison
                 if (user != null){
